@@ -6,7 +6,7 @@
  *	27/06/2018 First version
  */
 #ifndef SAFEMQTTCLIENT_H
-#define SAFEMQTTCLIENT_H	0.0101
+#define SAFEMQTTCLIENT_H	0.0102
 
 #include <PubSubClient.h>
 
@@ -34,7 +34,7 @@ public:
 	bool connect( 
 		const char *client_name, 
 		Duree &duration,
-		unsigned long int maxtries=SMC_MQTT_MAX_RETRY,
+		uint32_t maxtries=SMC_MQTT_MAX_RETRY,
 		bool clear_session=true
 	){
 		duration.reInit();
