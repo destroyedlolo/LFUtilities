@@ -12,7 +12,9 @@
 
 #include <LFUtilities/Duree.h>
 
-#define SMC_RETRY_DELAY 100	// Delay b/w attempts (ms)
+#define SMC_RETRY_DELAY 100		// Delay b/w attempts (ms)
+#define SMC_MQTT_MAX_RETRY 1500	// how long we will try ? (mS)
+
 
 class SafeMQTTClient {
 	PubSubClient clientMQTT;
@@ -32,7 +34,7 @@ public:
 	bool connect( 
 		const char *client_name, 
 		Duree &duration,
-		unsigned long int maxtries=1500,	// how long we will try ? (mS)
+		unsigned long int maxtries=SMC_MQTT_MAX_RETRY,
 		bool clear_session=true
 	){
 		duration.reInit();
