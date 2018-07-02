@@ -17,7 +17,7 @@
 #define SMC_MQTT_MAX_RETRY 1500		// how long we will try for MQTT ? (mS)
 #define SMC_WIFI_MAX_RETRY 15000	// how long we will try for WiFi ? (mS)
 
-#	define SERIAL_ENABLED
+/* #	define SERIAL_ENABLED */
 
 
 class SafeMQTTClient {
