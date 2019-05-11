@@ -1,13 +1,12 @@
 /* Safe MQTT client
  *
  * Ensure reconnection with a timeout
- * Store misses in RTC memory
  *
  *	27/06/2018 First version
  *	30/06/2018 Handle all networking aspect
  */
 #ifndef SAFEMQTTCLIENT_H
-#define SAFEMQTTCLIENT_H	0.0200
+#define SAFEMQTTCLIENT_H	0.0201
 
 #include <PubSubClient.h>
 
@@ -27,7 +26,7 @@ class SafeMQTTClient {
 	String MQTT_Message;	// Information topics
 	String MQTT_WiFi;		// Wifi connection duration
 	String MQTT_MQTT;		// MQTT connection duration
-	uint32_t mqtt_maxtries;	// For howlong we're trying to connect to the broker
+	uint32_t mqtt_maxtries;	// For how long are we trying to connect to the broker (seconds)
 	bool mqtt_clear_session;	// Clear session when connecting to MQTT ?
 
 	String WSSID;
@@ -50,9 +49,9 @@ public:
 	{
 		if( atopic ){
 			this->mqtttopic = String( atopic );
-			this->MQTT_Message = this->mqtttopic + "Message";
-			this->MQTT_WiFi = this->mqtttopic + "WiFi";
-			this->MQTT_MQTT = this->mqtttopic + "MQTT";
+			this->MQTT_Message = this->mqtttopic + "/Message";
+			this->MQTT_WiFi = this->mqtttopic + "/WiFi";
+			this->MQTT_MQTT = this->mqtttopic + "/MQTT";
 		}
 
 		this->clientMQTT.setServer( abURL, abport );
