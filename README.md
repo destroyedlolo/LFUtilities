@@ -2,6 +2,8 @@
 
 This library contains various stuffs/helpers to Arduino like developments.
 
+**IMPORTANT NOTE** : It is **MANDATORY** to include the fake file `#include <LFUtilities.h>` in your project otherwise Arduino IDE will not find other includes.
+
 -------
 
 ## Duration

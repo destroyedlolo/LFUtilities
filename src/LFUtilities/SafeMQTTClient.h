@@ -102,7 +102,7 @@ public:
 	){
 		duration.reInit();
 		for(;;){
-			if( this->clientMQTT.connect( this->clientID.c_str(), this->mqtt_clear_session ) ){	// Connected
+			if( this->clientMQTT.connect( this->clientID.c_str(), NULL,NULL,0,0,0,0, this->mqtt_clear_session ) ){	// Connected
 				duration.Finished();
 #ifdef SERIAL_ENABLED
 				Serial.print("\nMQTT ok : ");
