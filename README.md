@@ -49,7 +49,7 @@ MQTT's client with automatic reconnect facilities.
  - `void logMsg( const char *msg, bool reconnect=true )` - publish a message
 
 ### Published topics
-	- ***topic***/**Message** - Log messages
-	- ***topic***/**WiFi** - WiFi connection duration
-	- ***topic***/**MQTT** - MQTT connection duration
+	- ***topic*** / **Message** - Log messages
+	- ***topic*** / **WiFi** - WiFi connection duration
+	- ***topic*** / **MQTT** - MQTT connection duration
 
