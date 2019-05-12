@@ -32,8 +32,8 @@ MQTT's client with automatic reconnect facilities.
 	- `bool clear_session = false` - Among other things, with clean session set, it's not possible to receive asynchonously messages.
 	`)` - Constructor
 
- - `bool connectWiFi( Duration &duration, uint32_t maxtries=SMC_WIFI_MAX_RETRY )` - Connect to the WiFi network (*implies connection to MQTT as well*).
- - `bool connectMQTT( Duration &duration )` - Connect to the MQTT broker (*normaly, there is no need to call it directly*)
+ - `bool connectWiFi( Duration *duration = NULL, uint32_t maxtries=SMC_WIFI_MAX_RETRY )` - Connect to the WiFi network (*implies connection to MQTT as well*).
+ - `bool connectMQTT( Duration *duration = NULL )` - Connect to the MQTT broker (*normaly, there is no need to call it directly*)
 
  - `bool connected( void )` - Are we connected to the broker ?
 

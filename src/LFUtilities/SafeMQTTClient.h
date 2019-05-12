@@ -63,23 +63,26 @@ public:
 		 *******/
 
 	bool connectWiFi(
-		Duration &duration,
-		uint32_t maxtries=SMC_WIFI_MAX_RETRY
+		Duration *duration = NULL, uint32_t maxtries=SMC_WIFI_MAX_RETRY
 	){
-		duration.reInit();
+		Duration ldur;	// Local if not provided
+		if(!duration)
+			duration = &ldur;
+		else
+			duration->reInit();
 		WiFi.begin( WSSID.c_str(), WPWD.c_str() );
 		for(;;){
 			if( WiFi.status() == WL_CONNECTED ){
-				duration.Finished();
+				duration->Finished();
 #ifdef SERIAL_ENABLED
 				Serial.print("\nWiFi ok : ");
-				Serial.println( *duration );
+				Serial.println( **duration );
 #endif
-				this->publish( this->MQTT_WiFi, *duration, true );
+				this->publish( this->MQTT_WiFi, **duration, true );
 				return true;
 			}
 
-			if( *duration > maxtries ) // Too long
+			if( **duration > maxtries ) // Too long
 				return false;
 
 			delay(500);
@@ -97,23 +100,26 @@ public:
 
 	bool connected( void ){ return this->clientMQTT.connected(); }
 
-	bool connectMQTT( 
-		Duration &duration
-	){
-		duration.reInit();
+	bool connectMQTT(Duration *duration = NULL){
+		Duration ldur;	// Local if not provided
+		if(!duration)
+			duration = &ldur;
+		else
+			duration->reInit();
+
 		for(;;){
 			if( this->clientMQTT.connect( this->clientID.c_str(), NULL,NULL,0,0,0,0, this->mqtt_clear_session ) ){	// Connected
-				duration.Finished();
+				duration->Finished();
 #ifdef SERIAL_ENABLED
 				Serial.print("\nMQTT ok : ");
-				Serial.println( *duration );
+				Serial.println( **duration );
 #endif
 				if( this->mqtttopic.length() )	// Publish connection duration
-					this->clientMQTT.publish( MQTT_MQTT.c_str(), String(*duration, DEC).c_str());
+					this->clientMQTT.publish( MQTT_MQTT.c_str(), String(**duration, DEC).c_str());
 				return true;
 			} else {	// Failure
 				/*D* Peut-être ajouter un callback pour afficher l'erreur */
-				if( *duration > this->mqtt_maxtries ) // Too long
+				if( **duration > this->mqtt_maxtries ) // Too long
 					return false;
 				delay( SMC_RETRY_DELAY );
 #ifdef SERIAL_ENABLED
@@ -132,8 +138,7 @@ public:
 	){
 		if( !this->clientMQTT.connected() ){
 			if( reconnect ){
-				Duration dMQTT;
-				if( !this->connectMQTT( dMQTT ) )	// Re-connection failed
+				if( !this->connectMQTT() )	// Re-connection failed
 					return;
 			} else	// Unable to reconnect
 				return;
