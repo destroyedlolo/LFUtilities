@@ -33,6 +33,16 @@ public:
 
 	void setNext( unsigned long val ){	this->next = val; }
 	unsigned long getNext( void ){ return this->next; }
+
+	bool isExhausted( unsigned long now ){
+		return( this->next > now );
+	}
+	unsigned long remain( unsigned long now ){
+		if( this->next > now )
+			return this->next - now;
+		else
+			return 0;
+	}
 };
 
 #endif
