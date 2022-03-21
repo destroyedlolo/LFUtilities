@@ -4,9 +4,10 @@
  *
  *	27/06/2018 First version
  *	30/06/2018 Handle all networking aspect
+ *	21/03/2022 Add get*()
  */
 #ifndef SAFEMQTTCLIENT_H
-#define SAFEMQTTCLIENT_H	0.0201
+#define SAFEMQTTCLIENT_H	0.0300
 
 #include <PubSubClient.h>
 
@@ -57,6 +58,18 @@ public:
 		this->clientMQTT.setServer( abURL, abport );
 	}
 
+
+	const char *getMQTTMessageTopic( void ){
+		return this->MQTT_Message.c_str();
+	}
+
+	const char *getMQTTWiFiTopic( void ){
+		return this->MQTT_WiFi.c_str();
+	}
+
+	const char *getMQTTMQTTTopic( void ){
+		return this->MQTT_MQTT.c_str();
+	}
 
 		/*******
 		 * Networks 
