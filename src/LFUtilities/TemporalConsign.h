@@ -5,7 +5,7 @@
  * 30/06/2018 First version from SondePiscine probe code
  */
 #ifndef TEMPORAL_CONSIGN_H
-#define TEMPORAL_CONSIGN_H 0.0100
+#define TEMPORAL_CONSIGN_H 0.0200
 
 #include <KeepInRTC.h>
 
@@ -31,6 +31,7 @@ public:
 		return false;
 	}
 
+	void setNext( void ){ this->next += this->consign; }
 	void setNext( unsigned long val ){	this->next = val; }
 	unsigned long getNext( void ){ return this->next; }
 
