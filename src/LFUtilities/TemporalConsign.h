@@ -3,9 +3,10 @@
  * Manage simple consign
  *
  * 30/06/2018 First version from SondePiscine probe code
+ * 22/03/2022 Correct time remaining :(
  */
 #ifndef TEMPORAL_CONSIGN_H
-#define TEMPORAL_CONSIGN_H 0.0200
+#define TEMPORAL_CONSIGN_H 0.0201
 
 #include <KeepInRTC.h>
 
@@ -36,10 +37,10 @@ public:
 	unsigned long getNext( void ){ return this->next; }
 
 	bool isExhausted( unsigned long now ){
-		return( this->next > now );
+		return( this->next < now );
 	}
 	unsigned long remain( unsigned long now ){
-		if( this->next > now )
+		if( this->next < now )
 			return this->next - now;
 		else
 			return 0;
