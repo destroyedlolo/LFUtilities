@@ -6,7 +6,7 @@
  * 22/03/2022 Correct time remaining :(
  */
 #ifndef TEMPORAL_CONSIGN_H
-#define TEMPORAL_CONSIGN_H 0.0201
+#define TEMPORAL_CONSIGN_H 0.0300
 
 #include <KeepInRTC.h>
 
@@ -32,8 +32,20 @@ public:
 		return false;
 	}
 
+	/* set next deadline
+	 * -> no arg : current next is increased by the consign
+	 * -> value : set to an absolute value
+	 */
 	void setNext( void ){ this->next += this->consign; }
 	void setNext( unsigned long val ){	this->next = val; }
+
+	/* set next deadline to provided value + consign
+	 * typically, value is related to millis()
+	 */
+	void restart( unsigned long val ){
+		this->next = val + this->consign;
+	}
+
 	unsigned long getNext( void ){ return this->next; }
 
 	bool isExhausted( unsigned long now ){
