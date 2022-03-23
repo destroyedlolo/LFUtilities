@@ -91,8 +91,8 @@ public:
 				Serial.print("\nWiFi ok : ");
 				Serial.println( **duration );
 #endif
-// can't publish as MQTT not yet connected
-//				this->publish( this->MQTT_WiFi, **duration, true );
+					// Will connect to MQTT
+				this->publish( this->MQTT_WiFi, **duration, true );
 				return true;
 			}
 
