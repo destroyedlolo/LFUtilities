@@ -7,7 +7,7 @@
  *	21/03/2022 Add get*()
  */
 #ifndef SAFEMQTTCLIENT_H
-#define SAFEMQTTCLIENT_H	0.0300
+#define SAFEMQTTCLIENT_H	0.0301
 
 #include <PubSubClient.h>
 
@@ -91,7 +91,8 @@ public:
 				Serial.print("\nWiFi ok : ");
 				Serial.println( **duration );
 #endif
-				this->publish( this->MQTT_WiFi, **duration, true );
+// can't publish as MQTT not yet connected
+//				this->publish( this->MQTT_WiFi, **duration, true );
 				return true;
 			}
 
