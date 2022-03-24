@@ -7,7 +7,7 @@
  *	21/03/2022 Add get*()
  */
 #ifndef SAFEMQTTCLIENT_H
-#define SAFEMQTTCLIENT_H	0.0301
+#define SAFEMQTTCLIENT_H	0.0400
 
 #include <PubSubClient.h>
 
@@ -141,6 +141,11 @@ public:
 #endif
 			}
 		}
+	}
+
+	void disconnect( void ){
+		if( this->connected() )
+			this->clientMQTT.disconnect();
 	}
 
 	PubSubClient &getClient( void ){ return this->clientMQTT; }
